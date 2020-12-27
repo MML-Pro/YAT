@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">YAT First Exercise</string>
+    <string name="my_first_app">My first app</string>
+    <string name="submit_button">Submit</string>
+    <string name="login_screen_title">Login Screen</string>
+    <string name="username_TextView">Email</string>
+    <string name="username_editText">Please enter your email</string>
+    <string name="password_TextView">Password</string>
+    <string name="password_editText">Please insert password</string>
+    <string name="signIn_button">Sing in</string>
+    <string name="signUp_button">Sing Up</string>
+</resources>
