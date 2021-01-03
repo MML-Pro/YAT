@@ -21,8 +21,8 @@ public class RestaurantAdapter extends ArrayAdapter<Restaurant> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.restaurant_row,parent,false);
+
+        View view = LayoutInflater.from(context).inflate(R.layout.restaurant_row,parent,false);
 
         TextView restaurantName = (TextView) view.findViewById(R.id.restaurant_name);
         TextView restaurantAddress = (TextView) view.findViewById(R.id.restaurant_address);

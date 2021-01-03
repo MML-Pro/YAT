@@ -21,8 +21,8 @@ import java.util.ArrayList;
  */
 public class DataRetreival {
 
-    public JSONArray getRestaurantJson(String urlStr) {
-        JSONArray dataArray = null;
+    public JSONObject getRestaurantJson(String urlStr) {
+        JSONObject dataArray = null;
         try {
             URL url = new URL(urlStr);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -39,7 +39,7 @@ public class DataRetreival {
                 connection.disconnect();
                 String dataStr = stringBuilder.toString();
                 Log.e("data", dataStr);
-                dataArray = new JSONArray(dataStr);
+                dataArray = new JSONObject(dataStr);
             }
         } catch (MalformedURLException e) {
             Log.e("url exception", "not valid url");
@@ -51,25 +51,25 @@ public class DataRetreival {
         return dataArray;
     }
 
-    public ArrayList<Restaurant> parseJson(JSONArray jsonArray) {
+    public ArrayList<Restaurant> parseJson(JSONObject jsonObject) {
         ArrayList<Restaurant> restaurantArrayList = new ArrayList<>();
-        JSONObject jsonObject = new JSONObject();
-        for (int i = 0; i < jsonArray.length(); i++) {
+
             try {
-                jsonObject = jsonArray.getJSONObject(i);
                 Restaurant restaurant = new Restaurant();
 
-                restaurant.setRestaurantID(jsonObject.getInt("id"));
-                restaurant.setRestaurantName(jsonObject.getString("name"));
-                restaurant.setRestaurantAddress(jsonObject.getString("address"));
-                restaurant.setRestaurantLogo(jsonObject.getString("logo"));
+                JSONObject array = jsonObject.getJSONObject("array");
+                JSONObject resturantinfo = array.getJSONObject("restaurant-info");
+
+                restaurant.setRestaurantID(resturantinfo.getInt("id"));
+                restaurant.setRestaurantName(resturantinfo.getString("name"));
+                restaurant.setRestaurantAddress(resturantinfo.getString("address"));
+                restaurant.setRestaurantLogo(resturantinfo.getString("logo"));
 
                 restaurantArrayList.add(restaurant);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
 
-        }
         Log.e("size", restaurantArrayList.size() + "");
         return restaurantArrayList;
     }
