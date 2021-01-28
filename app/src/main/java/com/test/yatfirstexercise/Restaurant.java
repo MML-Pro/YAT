@@ -5,7 +5,7 @@ public class Restaurant {
     private int restaurantID;
     private String restaurantName;
     private String restaurantAddress;
-    private String restaurantLogo;
+    private String logoURL;
 
     public int getRestaurantID() {
         return restaurantID;
@@ -31,11 +31,11 @@ public class Restaurant {
         this.restaurantAddress = restaurantAddress;
     }
 
-    public String getRestaurantLogo() {
-        return restaurantLogo;
+    public String getLogoURL() {
+        return logoURL;
     }
 
-    public void setRestaurantLogo(String restaurantLogo) {
-        this.restaurantLogo = restaurantLogo;
+    public void setLogoURL(String logoURL) {
+        this.logoURL = logoURL;
     }
 }

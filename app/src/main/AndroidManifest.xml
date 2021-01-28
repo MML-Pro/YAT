@@ -13,7 +13,7 @@
         android:theme="@style/Theme.YATFirstExercise">
         <activity android:name=".RestaurantActivity"></activity>
         <activity android:name=".RegistrationActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainSignInActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

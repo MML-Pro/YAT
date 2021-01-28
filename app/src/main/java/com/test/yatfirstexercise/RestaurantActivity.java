@@ -2,9 +2,10 @@ package com.test.yatfirstexercise;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.os.AsyncTask;
+import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.util.Log;
+import android.util.LruCache;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -14,10 +15,10 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -33,7 +34,8 @@ public class RestaurantActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant);
 
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
+//        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        RequestQueue requestQueue = VolleyOperators.getInstance(this);
 
         String url = "https://gist.githubusercontent.com/sharkyze/71efb42a5ee58c7a892bd0423f125802/raw/08655067e3bb69dc1c8cde68edc7f901c00b9205/restaurant-menu.json";
 
@@ -47,7 +49,7 @@ public class RestaurantActivity extends AppCompatActivity {
                     Restaurant restaurant = new Restaurant();
                     restaurant.setRestaurantName(resturantinfo.getString("name"));
                     restaurant.setRestaurantAddress(resturantinfo.getString("address"));
-                    restaurant.setRestaurantLogo(resturantinfo.getString("logo"));
+                    restaurant.setLogoURL(resturantinfo.getString("logo"));
 
                     restaurantArrayList.add(restaurant);
                     adapter.notifyDataSetChanged();
@@ -66,9 +68,23 @@ public class RestaurantActivity extends AppCompatActivity {
 
         requestQueue.add(jsonObjectRequest);
 
+        ImageLoader mImageLoader = new ImageLoader(requestQueue, new ImageLoader.ImageCache() {
+            final LruCache<String,Bitmap> lruCache =new LruCache<>((int)Runtime.getRuntime().maxMemory());
+
+            @Override
+            public Bitmap getBitmap(String url) {
+                return lruCache.get(url);
+            }
+
+            @Override
+            public void putBitmap(String url, Bitmap bitmap) {
+                lruCache.put(url,bitmap);
+            }
+        });
+
 
         restaurantListView = findViewById(R.id.restaurantListView);
-        adapter = new RestaurantAdapter(this,R.layout.restaurant_row,restaurantArrayList);
+        adapter = new RestaurantAdapter(this, R.layout.restaurant_row, restaurantArrayList);
         restaurantListView.setAdapter(adapter);
 
         restaurantListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

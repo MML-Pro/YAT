@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "297501968910",
+    "project_id": "yatfirstexercise",
+    "storage_bucket": "yatfirstexercise.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:297501968910:android:23bcb749b4693c2cf4ca5f",
+        "android_client_info": {
+          "package_name": "com.test.yatfirstexercise"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "297501968910-dsbb41dkigf6sja4nn9e3dtkrb43dqha.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.test.yatfirstexercise",
+            "certificate_hash": "00b0ad173639b3c1bc958a62370aeff4db07aae6"
+          }
+        },
+        {
+          "client_id": "297501968910-0ljos98941pa75cl1p3h9pk8c41bq8gp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQu4HRc8h-hTPZEwYA-F9oj2jkwCoLKx0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "297501968910-0ljos98941pa75cl1p3h9pk8c41bq8gp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

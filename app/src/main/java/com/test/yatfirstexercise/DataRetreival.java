@@ -2,7 +2,6 @@ package com.test.yatfirstexercise;
 
 import android.util.Log;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -63,7 +62,7 @@ public class DataRetreival {
                 restaurant.setRestaurantID(resturantinfo.getInt("id"));
                 restaurant.setRestaurantName(resturantinfo.getString("name"));
                 restaurant.setRestaurantAddress(resturantinfo.getString("address"));
-                restaurant.setRestaurantLogo(resturantinfo.getString("logo"));
+                restaurant.setLogoURL(resturantinfo.getString("logo"));
 
                 restaurantArrayList.add(restaurant);
             } catch (JSONException e) {

@@ -21,6 +21,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String KEY_NAME = "name";
     private static final String KEY_EMAIL = "email";
     public static final String KEY_PASSWORD = "password";
+    private static DBHelper dbHelper;
 
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -33,6 +34,16 @@ public class DBHelper extends SQLiteOpenHelper {
                 + KEY_NAME + " TEXT, " + KEY_EMAIL + " TEXT, " + KEY_PASSWORD + " TEXT)";
         db.execSQL(CREATE_USERS_TABLE);
     }
+
+    public static DBHelper getInstance(Context context) {
+
+        if (dbHelper == null) {
+            dbHelper = new DBHelper(context.getApplicationContext());
+        }
+        return dbHelper;
+
+    }
+
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -58,9 +69,13 @@ public class DBHelper extends SQLiteOpenHelper {
         Cursor cursor =
                 database.rawQuery("select * from "
                         + USERS_TABLE + " where " + KEY_EMAIL +
-                        " =? and " + KEY_PASSWORD + " =?" , new String[]{email, password});
+                        " =? and " + KEY_PASSWORD + " =?", new String[]{email, password});
         return cursor.getCount() > 0;
 
     }
 
+    public Cursor getUserInfo(String email) {
+        SQLiteDatabase database = this.getWritableDatabase();
+        return database.query(USERS_TABLE, new String[]{KEY_ID, KEY_EMAIL, KEY_PASSWORD}, KEY_EMAIL + " = ?", new String[]{email}, null, null, KEY_ID);
+    }
 }
